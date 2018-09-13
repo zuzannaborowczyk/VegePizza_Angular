@@ -1,0 +1,24 @@
+<table class="cart">
+  <tr>
+    <th>Number</th>
+    <th>Name</th>
+    <th>Availability</th>
+    <th>Description</th>
+    <th>Type</th>
+    <th>Price</th>
+  </tr>
+  <tr *ngFor="let dish of dishes">
+    <td>{{dish.id}}</td>
+    <td>{{dish.name}}</td>
+    <td>{{dish.isAvailable}}</td>
+    <td>{{dish.description}}</td>
+    <td>{{dish.type}}</td>
+    <td>{{dish.price}}</td>
+    <td class="button-delete">
+      <button  (click)="deleteOrderedDish(dishes.indexOf(dish), $event)">Delete</button>
+    </td>
+  </tr>
+  <div>Total order cost: <output class="totalCost">{{showTotalCost()}}</output> </div>
+  <button  (click)="navigateToSummary()">Order Summary</button>
+
+</table>

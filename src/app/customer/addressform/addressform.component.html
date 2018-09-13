@@ -1,0 +1,36 @@
+<h2>Deliver to:</h2>
+<form [formGroup]="newForm" id="addressForm" (ngSubmit) ="onSubmit()">
+  <table>
+    <tr>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr>
+      <td>Name:</td>
+      <td><input type="text" formControlName="firstName"></td>
+    </tr>
+    <tr>
+      <td>Surname:</td>
+      <td><input type="text" formControlName="lastName"></td>
+    </tr>
+    <tr>
+      <td>Phone:</td>
+      <td><input type="tel" formControlName="telephone"></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><input type="email" formControlName="email"></td>
+    </tr>
+    <tr>
+      <td>City:</td>
+      <td><input type="text" formControlName="city"></td>
+    </tr>
+    <tr>
+      <td>Street:</td>
+      <td><input type="text" formControlName="street"></td>
+    </tr>
+  </table>
+</form>
+<button type="submit" [disabled]="!newForm.valid" (click)="createOrder()">Make an Order!</button>
+
+<app-cart></app-cart>

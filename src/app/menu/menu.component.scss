@@ -1,0 +1,26 @@
+.getPizza, .getNoodles {
+  background-color: darkseagreen;
+  font-size: 10px;
+  width: 200px;
+  margin: 10px 30px 10px 30px;
+  border: none;
+  border-radius: 10px;
+  height: 50px;
+  font-size: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition-duration: 0.4s;
+  box-shadow: 0 9px #999;
+}
+.getPizza:hover {
+  background-color: white;
+  color: darkseagreen;
+}
+.getNoodles:hover {
+  background-color: white;
+  color: darkseagreen;
+}
+.menu{
+  width: 100%;
+}

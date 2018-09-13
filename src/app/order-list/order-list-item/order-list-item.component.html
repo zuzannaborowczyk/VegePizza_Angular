@@ -1,0 +1,9 @@
+<div class="menu">
+  <div class="order">
+    <h2>Id: {{order.id}}</h2>
+    <p>Name: {{order.firstName}}</p>
+    <p>Surname: {{order.lastName}}</p>
+    <p>Ordered dishes: {{order.dishIds}}</p>
+    <button (click)="navigateToOrderDetails(order.id)">Preview</button>
+  </div>
+</div>

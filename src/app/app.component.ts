@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {MenuService} from './shared/menu.service';
+import {Router} from '@angular/router';
+import {CartService} from './shared/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'VegePizza';
+
+  constructor() {}
+
+
 }
