@@ -14,11 +14,9 @@ export class CartService {
   dishesInCart$ = new Subject<Dish[]>();
   orderedDishes: Dish[] = [];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor() { }
 
-  addDish(dish: Dish) {
-    this.orderedDishes.push(dish);
-  }
+
   addDishToCart(dish: Dish): void {
     this.orderedDishes.push(dish);
     this.cart$.next(this.orderedDishes);

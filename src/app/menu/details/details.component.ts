@@ -2,32 +2,30 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MenuService} from '../../shared/menu.service';
 import {Dish} from '../../shared/dish';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
 
-  dish: Dish = {
-    'id': 1,
-    'name': 'Pizza Margherita',
-    'isAvailable': true,
-    'description': 'Sos, ser',
-    'type': 'pizza',
-    'price': 22,
-  };
+  private destroy$: Subject<void> = new Subject<void>();
+  dish: Dish = {} as Dish;
   sub: Subscription;
   constructor(private readonly router: ActivatedRoute, private readonly menuService: MenuService) {}
 
   ngOnInit() {
-    const id = this.router.snapshot.paramMap.get('id');
-   this.sub = this.menuService.getDish(+id).subscribe(menu => this.dish = menu);
+    const id = Number(this.router.snapshot.paramMap.get('id'));
+   this.sub = this.menuService.getDish(id).pipe(takeUntil(this.destroy$)).subscribe(menu => this.dish = menu);
   }
-  changeAvailabilityOfDish() {
-    this.dish.isAvailable = !this.dish.isAvailable;
-    this.sub = this.menuService.changeAvailabilityOfDish(this.dish).subscribe();
+  changeAvailabilityOfDish(dish: Dish) {
+    this.sub = this.menuService.changeAvailabilityOfDish(dish).subscribe();
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

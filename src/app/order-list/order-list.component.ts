@@ -1,21 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Order} from '../shared/order';
-import {Subscription} from 'rxjs';
+import {Subject} from 'rxjs';
 import {OrderService} from '../shared/order.service';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.scss']
 })
-export class OrderListComponent implements OnInit {
+export class OrderListComponent implements OnInit, OnDestroy {
 
   orders: Order[];
-  sub: Subscription;
+  private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private readonly orderService: OrderService) { }
+  constructor(private readonly orderService: OrderService) {
+  }
 
   ngOnInit() {
-    this.sub = this.orderService.getOrders().subscribe(result => this.orders = result);
+    this.orderService.getOrders().pipe(takeUntil(this.destroy$)).subscribe(result => this.orders = result);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

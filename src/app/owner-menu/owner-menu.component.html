@@ -2,7 +2,8 @@
   <span>VegePizza</span>
   <div>
     <input class="button" type="button" (click)=navigateToMenu() value="Menu" />
-    <input class="button" type="button" (click)=navigateToLogin() value="Login" />
+    <input class="button" type="button" *ngIf ="isLoggedIn()=== false" (click)=navigateToLogin() value="Login" />
+    <input class="button" type="button" *ngIf ="isLoggedIn()=== true" (click)=logout() value="Logout" />
     <input class="button" type="button" (click)=navigateToOrderList() value="Order List" />
     <button href="#" (click)="getPizza($event)" class="getPizza">Pizza</button>
     <button href="#" (click)="getNoodles($event)" class="getNoodles">Noodles</button>
@@ -22,13 +23,13 @@
       <th>Price</th>
     </tr>
     <tr *ngFor="let dish of (menuService.dishes$ | async)">
-      <td *ngIf="dish.isAvailable === true">{{dish.id}}</td>
-      <td *ngIf="dish.isAvailable === true">{{dish.name}}</td>
-      <td *ngIf="dish.isAvailable === true">{{dish.isAvailable}}</td>
-      <td *ngIf="dish.isAvailable === true">{{dish.description}}</td>
-      <td *ngIf="dish.isAvailable === true">{{dish.type}}</td>
-      <td *ngIf="dish.isAvailable === true">{{dish.price}}</td>
-      <td *ngIf="dish.isAvailable === true"><button href="#" (click) ="navigateToDetails(dish.id)">Details</button></td>
+      <td >{{dish.id}}</td>
+      <td >{{dish.name}}</td>
+      <td >{{dish.isAvailable}}</td>
+      <td >{{dish.description}}</td>
+      <td >{{dish.type}}</td>
+      <td >{{dish.price}}</td>
+      <td ><button href="#" (click) ="navigateToDetails(dish.id)">Details</button></td>
     </tr>
     <button href="#" (click)="addNewDish($event)" class="newDish">Add new dish</button>
   </table>

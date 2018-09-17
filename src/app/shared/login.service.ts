@@ -10,7 +10,6 @@ import {map} from 'rxjs/operators';
 })
 export class LoginService {
 
-  sub: Subscription;
   user: User = {} as User;
   private loggedIn = false;
 

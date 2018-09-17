@@ -40,7 +40,6 @@
       "type": "spagetti",
       "price": "17.50"
     }
-
   ],
   "orders": [
     {
@@ -91,9 +90,7 @@
     },
     {
       "dishIds": [
-        1,
-        1,
-        1
+        5
       ],
       "firstName": null,
       "lastName": null,
@@ -101,8 +98,21 @@
       "street": null,
       "email": null,
       "telephone": null,
-      "date": "2018-09-13T08:56:35.613Z",
+      "date": "2018-09-17T14:13:51.511Z",
       "id": 5
+    },
+    {
+      "dishIds": [
+        5
+      ],
+      "firstName": null,
+      "lastName": null,
+      "city": null,
+      "street": null,
+      "email": null,
+      "telephone": null,
+      "date": "2018-09-17T14:16:32.071Z",
+      "id": 6
     }
   ],
   "users": [

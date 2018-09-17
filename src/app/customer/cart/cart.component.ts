@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Dish} from '../../shared/dish';
 import {Subject, Subscription} from 'rxjs';
 import {CartService} from '../../shared/cart.service';
@@ -10,11 +10,10 @@ import {Router} from '@angular/router';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
   dishes: Dish[] = [];
-  sub: Subscription;
   index: number;
 
   constructor(private readonly cartService: CartService, private readonly router: Router) {
@@ -40,5 +39,9 @@ export class CartComponent implements OnInit {
 
   navigateToSummary() {
     this.router.navigate(['/makeAnOrder']);
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {Order} from '../../shared/order';
 import {Dish} from '../../shared/dish';
@@ -14,7 +14,7 @@ import {CartService} from '../../shared/cart.service';
 })
 export class AddressformComponent implements OnInit {
 
-  sub: Subscription;
+
   order: Order;
   dishes: Dish[];
   dishesIds: number[];
@@ -52,7 +52,5 @@ export class AddressformComponent implements OnInit {
   getDishes(): void {
     this.dishesIds = (JSON.parse(localStorage.getItem('cart') ? localStorage.getItem('cart') : '[]').map(dish => dish.id) as number[]);
   }
-  onSubmit() {
 
-  }
 }

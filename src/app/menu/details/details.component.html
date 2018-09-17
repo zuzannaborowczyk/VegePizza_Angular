@@ -1,9 +1,10 @@
 <h1>{{dish.name}}</h1>
 
-<ul>
-  <li><strong>Name:</strong><input [(ngModel)]="dish.name"></li>
-  <li><strong>Availability:</strong><input [(ngModel)]="dish.isAvailable"><button (click)="changeAvailabilityOfDish()">Change availability</button></li>
-  <li><strong>Description:</strong><input [(ngModel)]="dish.description"></li>
-  <li><strong>Type:</strong><input [(ngModel)]="dish.type"></li>
-  <li><strong>Price:</strong><input [(ngModel)]="dish.price"></li>
+<ul *ngIf="dish">
+  <li><strong>Name:</strong>{{dish.name}}</li>
+  <li><strong>Availability:</strong>{{dish.isAvailable}}<button (click)="changeAvailabilityOfDish(dish)">Change availability</button></li>
+  <li><strong>Description:</strong>{{dish.description}}</li>
+  <li><strong>Type:</strong>{{dish.type}}</li>
+  <li><strong>Price:</strong>{{dish.price}}</li>
+
 </ul>

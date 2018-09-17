@@ -4,6 +4,7 @@ import {MenuService} from '../shared/menu.service';
 import {Subject, Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {CartService} from '../shared/cart.service';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-menu',
@@ -13,15 +14,14 @@ import {CartService} from '../shared/cart.service';
 export class MenuComponent implements OnInit, OnDestroy {
 
   dishes: Dish[];
-  sub: Subscription;
-  dishes2$ = new Subject<Dish[]>();
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(public readonly menuService: MenuService, private readonly cartService: CartService, private readonly router: Router) { }
 
   ngOnInit() {
-    this.menuService.dishes$.subscribe(dishes => this.dishes = dishes);
+    this.menuService.dishes$.pipe(takeUntil(this.destroy$)).subscribe(dishes => this.dishes = dishes);
     this.menuService.getDishes();
-    this.cartService.dishesInCart$.subscribe(dishes => this.dishes = dishes);
+    this.cartService.dishesInCart$.pipe(takeUntil(this.destroy$)).subscribe(dishes => this.dishes = dishes);
     this.cartService.getDishesInCart();
   }
 
@@ -36,14 +36,8 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.menuService.dishes$.subscribe(dishes => this.dishes = dishes);
     this.menuService.getNoodles();
   }
-  addNewDish(dish: Dish) {
-    this.menuService.addNewDish(dish);
-  }
   addDishToCart(dish: Dish) {
-
     this.cartService.addDishToCart(dish);
-  }
-    ngOnDestroy(): void {
   }
   navigateToMenu() {
     this.menuService.getDishes();
@@ -62,5 +56,8 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.cartService.getDishesInCart();
     this.router.navigate(['/login']);
   }
-
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+}
 }
